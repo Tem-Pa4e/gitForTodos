@@ -1,6 +1,8 @@
 import React, {ChangeEvent} from 'react';
-import {Button} from "../button/Button";
+import {ButtonFilter} from "../buttonFilter/ButtonFilter";
 import {EditableSpan} from "../EditableSpan/EditableSpan";
+import {Checkbox, Radio, Switch} from "@material-ui/core";
+
 
 type TaskPropsType = {
     title: string
@@ -19,9 +21,9 @@ export const Task = (props: TaskPropsType) => {
     }
     return (
         <ul>
-            <li className={props.isDone ? 'is-done' : ''}><input type="checkbox" checked={props.isDone}
-                                                                 onChange={onChangeTaskStatus}/><EditableSpan
-                onChangeTitle={onChangeTitle} title={props.title}/><Button title={'x'} callBack={props.deleteTask}/></li>
+            <li className={props.isDone ? 'is-done':''}><Checkbox color={'primary'} size={'small'} checked={props.isDone} onChange={onChangeTaskStatus}/>
+                <EditableSpan
+                onChangeTitle={onChangeTitle} title={props.title}/><ButtonFilter title={'delete'} callBack={props.deleteTask}/></li>
         </ul>
     );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import {FilterType, TaskType } from "../../App"
-import {Button} from "../button/Button";
+import {ButtonFilter} from "../buttonFilter/ButtonFilter";
 import { Task } from '../task/Task';
 import {AddItemForm} from "../addItem/AddItemForm";
 import {ButtonFilterForm} from "../buttonFilterForm/ButtonFilterForm";
@@ -33,7 +33,7 @@ export const Todolist = (props: TodolistPropsType) => {
     }
     return (
         <div className={'todolistForm'}>
-            <h3><EditableSpan onChangeTitle={onChangeTodolistTitle} title={props.title} /><Button title={'x'} callBack={deleteTodolist}/></h3>
+            <h3><EditableSpan onChangeTitle={onChangeTodolistTitle} title={props.title} /><ButtonFilter title={'delete'} callBack={deleteTodolist}/></h3>
             <AddItemForm addItem={addTask}/>
             {props.tasks.map(t => {
                 const onChangeTaskStatus = (value: boolean) => {

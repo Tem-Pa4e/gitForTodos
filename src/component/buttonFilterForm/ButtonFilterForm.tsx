@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from "../button/Button";
+import {ButtonFilter} from "../buttonFilter/ButtonFilter";
 import {FilterType} from "../../App";
 
 type ButtonFilterFormType = {
@@ -20,11 +20,11 @@ export const ButtonFilterForm = (props: ButtonFilterFormType) => {
     }
     return (
         <div>
-            <Button style={props.filter === 'all' ? 'active-filter' : ''} title={'all'} callBack={changeAllFilter}/>
-            <Button style={props.filter === 'active' ? 'active-filter' : ''} title={'active'}
-                    callBack={changeActiveFilter}/>
-            <Button style={props.filter === 'completed' ? 'active-filter' : ''} title={'completed'}
-                    callBack={changeCompletedFilter}/>
+            <ButtonFilter color={'inherit'} variant={props.filter === 'all' ? 'contained' : 'text'}  title={'all'} callBack={changeAllFilter}/>
+            <ButtonFilter color={'inherit'} variant={props.filter === 'active' ? 'contained' : 'text'}  title={'active'}
+                          callBack={changeActiveFilter}/>
+            <ButtonFilter color={'inherit'} variant={props.filter === 'completed' ? 'contained' : 'text'}  title={'completed'}
+                          callBack={changeCompletedFilter}/>
         </div>
     );
 };

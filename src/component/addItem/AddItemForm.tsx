@@ -1,5 +1,7 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
-import {Button} from "../button/Button";
+import {ButtonFilter} from "../buttonFilter/ButtonFilter";
+import {TextField} from "@material-ui/core";
+
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
@@ -7,7 +9,7 @@ type AddItemFormPropsType = {
 
 export const AddItemForm = (props: AddItemFormPropsType) => {
     const [title, setTitle] = useState<string>('')
-    const [error, setError] = useState<null| string>(null)
+    const [error, setError] = useState<null | string>(null)
     const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
@@ -19,7 +21,7 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
         } else {
             setError('Title is required')
         }
-        setError(null)
+
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         setError(null)
@@ -29,8 +31,9 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
     }
     return (
         <div className={'itemForm'}>
-            <input className={error ? 'error': ''} value={title} onChange={onChangeTitle} onKeyPress={onKeyPressHandler} /><Button title={'+'} callBack={addItem}/>
-            {error && <div className={'error-message'}>{error}</div>}
+            <TextField helperText={error} size={"small"} error={!!error} value={title} onChange={onChangeTitle}
+                       onKeyPress={onKeyPressHandler}/><ButtonFilter title={'added'} callBack={addItem}/>
+
         </div>
 
     );
