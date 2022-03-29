@@ -20,10 +20,12 @@ export const ButtonFilterForm = (props: ButtonFilterFormType) => {
     }
     return (
         <div>
-            <ButtonFilter color={'inherit'} variant={props.filter === 'all' ? 'contained' : 'text'}  title={'all'} callBack={changeAllFilter}/>
-            <ButtonFilter color={'inherit'} variant={props.filter === 'active' ? 'contained' : 'text'}  title={'active'}
+            <ButtonFilter color={'inherit'} variant={props.filter === 'all' ? 'contained' : 'text'} title={'all'}
+                          callBack={changeAllFilter}/>
+            <ButtonFilter color={'inherit'} variant={props.filter === 'active' ? 'contained' : 'text'} title={'active'}
                           callBack={changeActiveFilter}/>
-            <ButtonFilter color={'inherit'} variant={props.filter === 'completed' ? 'contained' : 'text'}  title={'completed'}
+            <ButtonFilter color={'inherit'} variant={props.filter === 'completed' ? 'contained' : 'text'}
+                          title={'completed'}
                           callBack={changeCompletedFilter}/>
         </div>
     );

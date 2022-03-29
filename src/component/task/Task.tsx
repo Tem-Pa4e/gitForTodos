@@ -21,9 +21,12 @@ export const Task = (props: TaskPropsType) => {
     }
     return (
         <ul>
-            <li className={props.isDone ? 'is-done':''}><Checkbox color={'primary'} size={'small'} checked={props.isDone} onChange={onChangeTaskStatus}/>
+            <li className={props.isDone ? 'is-done' : ''}><Checkbox color={'primary'} size={'small'}
+                                                                    checked={props.isDone}
+                                                                    onChange={onChangeTaskStatus}/>
                 <EditableSpan
-                onChangeTitle={onChangeTitle} title={props.title}/><ButtonFilter title={'delete'} callBack={props.deleteTask}/></li>
+                    onChangeTitle={onChangeTitle} title={props.title}/><ButtonFilter title={'delete'}
+                                                                                     callBack={props.deleteTask}/></li>
         </ul>
     );
 };

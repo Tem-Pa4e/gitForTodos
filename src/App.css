@@ -1,37 +1,7 @@
-/*.App {*/
-/*  display: flex;*/
-/*  text-align: center;*/
-
-/*}*/
-/*.todolistForm {*/
-/*  margin: 30px;*/
-/*  border: 1px black solid;*/
-/*  border-radius: 20px;*/
-/*  padding: 10px;*/
-/*}*/
-/*.itemForm {*/
-/*  display: flex;*/
-/*  max-height: 20px;*/
-/*  text-align: center;*/
-/*  margin: 30px;*/
-/*}*/
 
 li {
   list-style-type: none;
-
 }
-
-/*.error {*/
-/*  border: red 1px solid;*/
-/*}*/
-
-/*.error-message {*/
-/*  color: red;*/
-/*}*/
-/*.active-filter {*/
-/*  background-color: aquamarine;*/
-/*}*/
-
 .is-done {
   opacity: 0.5;
 }
