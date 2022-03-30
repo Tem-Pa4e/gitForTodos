@@ -7,7 +7,7 @@ type EditableSpanPropsType = {
     onChangeTitle: (title: string) => void
 }
 
-export const EditableSpan = (props: EditableSpanPropsType) => {
+export const EditableSpan = React.memo((props: EditableSpanPropsType) => {
     const [editMode, setEditMpde] = useState(false)
     const [title, setTitle] = useState(props.title)
     const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,5 +26,5 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
         <TextField size={'small'} value={title} onChange={onChangeTitle} autoFocus onBlur={offEditMode}
                    variant={'standard'}/> :
         <span onDoubleClick={activateEditMode}>{props.title}</span>
-};
+});
 

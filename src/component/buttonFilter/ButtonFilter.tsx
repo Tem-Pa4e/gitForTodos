@@ -5,12 +5,11 @@ import {Add, Delete} from "@material-ui/icons";
 type ButtonPropsType = {
     title: string
     callBack: () => void
-
     variant?: 'text' | 'outlined' | 'contained'
     color?: 'primary' | 'default' | 'inherit' | 'secondary'
 }
 
-export const ButtonFilter = (props: ButtonPropsType) => {
+export const ButtonFilter = React.memo((props: ButtonPropsType) => {
     let icons
     if (props.title === 'delete') {
         icons = <IconButton size={"small"} onClick={props.callBack}><Delete/></IconButton>
@@ -22,4 +21,4 @@ export const ButtonFilter = (props: ButtonPropsType) => {
         <span>{icons}</span> :
         <Button size={'small'} color={props.color} variant={props.variant}
                 onClick={props.callBack}>{props.title}</Button>
-};
+});

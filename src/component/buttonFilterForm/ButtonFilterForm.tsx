@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {ButtonFilter} from "../buttonFilter/ButtonFilter";
 import {FilterType} from "../../App";
 
@@ -9,15 +9,16 @@ type ButtonFilterFormType = {
 }
 
 export const ButtonFilterForm = (props: ButtonFilterFormType) => {
-    const changeAllFilter = () => {
+
+    const changeAllFilter = useCallback(() => {
         props.changeFilter(props.id, 'all')
-    }
-    const changeActiveFilter = () => {
+    },[props.changeFilter,props.id])
+    const changeActiveFilter = useCallback(() => {
         props.changeFilter(props.id, 'active')
-    }
-    const changeCompletedFilter = () => {
+    },[props.changeFilter,props.id])
+    const changeCompletedFilter = useCallback(() => {
         props.changeFilter(props.id, 'completed')
-    }
+    },[props.changeFilter,props.id])
     return (
         <div>
             <ButtonFilter color={'inherit'} variant={props.filter === 'all' ? 'contained' : 'text'} title={'all'}
