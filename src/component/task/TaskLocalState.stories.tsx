@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {ComponentStory, ComponentMeta} from '@storybook/react';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {action} from "@storybook/addon-actions";
 import {Task} from './Task';
+import {TaskDomainType, TaskPriorities, TaskStatuses} from "../../api/todolist-api";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -16,8 +17,15 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Task> = (args) => {
-    const [task, setTask] = useState({id: '1', title: 'React', isDone: true})
-    const onChangeTaskStatus = () => setTask({id: '1', title: 'React', isDone: !task.isDone})
+    const [task, setTask] = useState<TaskDomainType>({id: '1', title: 'React', status: TaskStatuses.Completed, description: '', startDate: '', priority: TaskPriorities.Low, addedDate: '', deadline: '', todoListId: '1', order: 0})
+    const onChangeTaskStatus = () => setTask({id: '1', title: 'React', status: TaskStatuses.New,
+        description: '',
+        startDate: '',
+        priority: TaskPriorities.Low,
+        addedDate: '',
+        deadline: '',
+        todoListId: '1',
+        order: 0})
 
 
     return <Task
