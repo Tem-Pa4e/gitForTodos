@@ -1,14 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import {todolistApi, CreatedTaskEntityType} from "../api/todolist-api";
+import {todolistApi} from "../api/todolist-api";
+import {CreatedTaskEntityType} from "../typing/typing";
 
 export default {
     title: 'API'
-}
-const settings = {
-    withCredentials: true,
-    headers: {
-        'API-KEY': 'df9468ca-605b-46fc-bc8e-4044e920f223'
-    }
 }
 
 export const GetTodolists = () => {
@@ -19,7 +14,6 @@ export const GetTodolists = () => {
                 setState(res.data)
             })
     }, [])
-
     return <div> {JSON.stringify(state)}</div>
 }
 export const CreateTodolist = () => {
@@ -31,7 +25,6 @@ export const CreateTodolist = () => {
                 setState(res.data.data.item)
             })
     }, [])
-
     return <div> {JSON.stringify(state)}</div>
 }
 export const DeleteTodolist = () => {
@@ -43,7 +36,6 @@ export const DeleteTodolist = () => {
                 setState(res.data)
             })
     }, [])
-
     return <div> {JSON.stringify(state)}</div>
 }
 export const UpdateTodolistTitle = () => {
@@ -56,7 +48,6 @@ export const UpdateTodolistTitle = () => {
                 setState(res.data)
             })
     }, [])
-
     return <div> {JSON.stringify(state)}</div>
 }
 export const GetTasks = () => {
@@ -68,7 +59,6 @@ export const GetTasks = () => {
                 setState(res.data.items)
             })
     }, [])
-
     return <div> {JSON.stringify(state)}</div>
 }
 export const CreateTasks = () => {
@@ -81,7 +71,6 @@ export const CreateTasks = () => {
                 setState(res.data.data.item)
             })
     }, [])
-
     return <div> {JSON.stringify(state)}</div>
 }
 
@@ -92,7 +81,6 @@ export const DeleteTasks = () => {
         const taskId = "59dc011d-1abd-48d7-b2a3-247720280fd4"
         todolistApi.deleteTask(todolistId, taskId)
             .then(res=> {
-
                 setState(res.data)
             })
     }, [])

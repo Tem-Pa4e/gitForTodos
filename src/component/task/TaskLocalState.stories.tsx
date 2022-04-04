@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {action} from "@storybook/addon-actions";
 import {Task} from './Task';
-import {TaskDomainType, TaskPriorities, TaskStatuses} from "../../api/todolist-api";
+import {TaskDomainType, TaskPriorities, TaskStatuses} from "../../typing/typing";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -26,7 +26,6 @@ const Template: ComponentStory<typeof Task> = (args) => {
         deadline: '',
         todoListId: '1',
         order: 0})
-
 
     return <Task
         deleteTask={args.deleteTask}

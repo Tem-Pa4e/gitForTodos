@@ -1,13 +1,12 @@
 import React, {useCallback, useEffect} from 'react';
-import {FilterType} from "../../App"
 import {ButtonFilter} from "../buttonFilter/ButtonFilter";
 import {Task} from '../task/Task';
 import {AddItemForm} from "../addItem/AddItemForm";
 import {ButtonFilterForm} from "../buttonFilterForm/ButtonFilterForm";
 import {EditableSpan} from "../EditableSpan/EditableSpan";
-import {TaskDomainType, TaskStatuses} from "../../api/todolist-api";
 import {useDispatch} from "react-redux";
 import {fetchTaskTC} from "../../state/tasks-reducer";
+import {FilterType, TaskDomainType, TaskStatuses} from '../../typing/typing';
 
 type TodolistPropsType = {
     title: string
@@ -26,9 +25,10 @@ type TodolistPropsType = {
 export const Todolist = React.memo((props: TodolistPropsType) => {
 
     const dispatch = useDispatch()
+
     useEffect(() => {
         dispatch(fetchTaskTC(props.id))
-    },[])
+    }, [])
 
     let taskForTodolist = props.tasks
     if (props.filter === "active") {
@@ -37,6 +37,7 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
     if (props.filter === "completed") {
         taskForTodolist = props.tasks.filter(t => t.status)
     }
+
     const addTask = useCallback((title: string) => {
         props.addTask(props.id, title)
     }, [props.addTask, props.id])
@@ -56,7 +57,6 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
         props.onChangeTaskTitle(props.id, id, title)
     }, [props.id])
 
-
     return (
         <div className={'todolistForm'}>
             <h3><EditableSpan onChangeTitle={onChangeTodolistTitle} title={props.title}/><ButtonFilter title={'delete'}
@@ -64,7 +64,6 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
             </h3>
             <AddItemForm addItem={addTask}/>
             {taskForTodolist.map(t => {
-
                 return <Task onChangeTaskTitle={onChangeTitle} task={t} key={t.id} deleteTask={deleteTask}
                              onChangeTaskStatus={onChangeTaskStatus}/>
             })}
