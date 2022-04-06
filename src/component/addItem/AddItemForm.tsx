@@ -1,9 +1,11 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
 import {ButtonFilter} from "../buttonFilter/ButtonFilter";
 import {TextField} from "@material-ui/core";
+import {RequestStatusType} from "../app/app-reducer";
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
+    disabled?: RequestStatusType
 }
 
 export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
@@ -32,8 +34,8 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
     }
     return (
         <div className={'itemForm'}>
-            <TextField helperText={error} size={"small"} error={!!error} value={title} onChange={onChangeTitle}
-                       onKeyPress={onKeyPressHandler}/><ButtonFilter title={'added'} callBack={addItem}/>
+            <TextField helperText={error} disabled={props.disabled==='loading'} size={"small"} error={!!error} value={title} onChange={onChangeTitle}
+                       onKeyPress={onKeyPressHandler}/><ButtonFilter disabled={props.disabled} title={'added'} callBack={addItem}/>
         </div>
     );
 });

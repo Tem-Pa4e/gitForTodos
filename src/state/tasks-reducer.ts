@@ -1,9 +1,11 @@
-import {AddTodoAT, RemoveTodoAT, SetTodoAT} from "./todolists-reducer";
+import {AddTodoAT, ChangeTodoEntityStatusAT, RemoveTodoAT, SetTodoAT} from "./todolists-reducer";
 import {Dispatch} from "redux";
 import {todolistApi} from "../api/todolist-api";
 import {AppRootStateType} from "./store";
 import {CreatedTaskEntityType, TaskDomainType, TasksStateType} from "../typing/typing";
-import {SetAppStatusAC, SetAppStatusAT} from "../component/app/app-reducer";
+import {SetAppStatusAC, SetAppStatusAT, SetAppErrorAT} from "../component/app/app-reducer";
+import {handleServerAppError, handleServerNetworkError} from "../component/utils/error-utils";
+import {AxiosError} from "axios";
 
 const initialState: TasksStateType = {}
 
@@ -12,6 +14,8 @@ type ActionTaskType =
     | AddTodoAT
     | SetTodoAT
     | SetAppStatusAT
+    | SetAppErrorAT
+    | ChangeTodoEntityStatusAT
     | ReturnType<typeof SetTasksAC>
     | ReturnType<typeof UpdateTaskAC>
     | ReturnType<typeof RemoveTaskAC>
@@ -88,8 +92,16 @@ export const removeTaskTC = (todolistId: string, taskId: string) => {
         dispatch(SetAppStatusAC('loading'))
         todolistApi.deleteTask(todolistId, taskId)
             .then(res => {
-                dispatch(RemoveTaskAC(todolistId, taskId))
-                dispatch(SetAppStatusAC('succeeded'))
+                if (res.data.resultCode===0) {
+                    dispatch(RemoveTaskAC(todolistId, taskId))
+                    dispatch(SetAppStatusAC('succeeded'))
+                } else {
+                    handleServerAppError(dispatch, res.data)
+                }
+
+            })
+            .catch((err: AxiosError) => {
+                handleServerNetworkError(dispatch, err.message)
             })
     }
 }
@@ -98,8 +110,15 @@ export const addTaskTC = (todolistId: string, title: string) => {
         dispatch(SetAppStatusAC('loading'))
         todolistApi.createTask(todolistId, title)
             .then(res => {
-                dispatch(AddTaskAC(res.data.data.item))
-                dispatch(SetAppStatusAC('succeeded'))
+                if (res.data.resultCode === 0) {
+                    dispatch(AddTaskAC(res.data.data.item))
+                    dispatch(SetAppStatusAC('succeeded'))
+                } else {
+                    handleServerAppError<{ item: TaskDomainType }>(dispatch, res.data)
+                }
+            })
+            .catch((err: AxiosError) => {
+                handleServerNetworkError(dispatch, err.message)
             })
     }
 }
@@ -129,9 +148,17 @@ export const updateTaskModelTC = (todolistId: string, taskId: string, model: Upd
                 ...model
             }
             todolistApi.updateTask(todolistId, taskId, apiModel)
-                .then(() => {
-                    dispatch(UpdateTaskAC(todolistId, taskId, model))
-                    dispatch(SetAppStatusAC('succeeded'))
+                .then((res) => {
+                    if (res.data.resultCode===0) {
+                        dispatch(UpdateTaskAC(todolistId, taskId, model))
+                        dispatch(SetAppStatusAC('succeeded'))
+                    } else {
+                        handleServerAppError<{ item: CreatedTaskEntityType }>(dispatch, res.data)
+                    }
+
+                })
+                .catch((err: AxiosError)=> {
+                    handleServerNetworkError(dispatch, err.message)
                 })
         }
     }

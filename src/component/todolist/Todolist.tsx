@@ -7,10 +7,12 @@ import {EditableSpan} from "../EditableSpan/EditableSpan";
 import {useDispatch} from "react-redux";
 import {fetchTaskTC} from "../../state/tasks-reducer";
 import {FilterType, TaskDomainType, TaskStatuses} from '../../typing/typing';
+import {RequestStatusType} from "../app/app-reducer";
 
 type TodolistPropsType = {
     title: string
     id: string
+    entityStatus: RequestStatusType | undefined
     tasks: Array<TaskDomainType>
     filter: FilterType
     deleteTask: (todolistId: string, taskId: string) => void
@@ -59,10 +61,10 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
 
     return (
         <div className={'todolistForm'}>
-            <h3><EditableSpan onChangeTitle={onChangeTodolistTitle} title={props.title}/><ButtonFilter title={'delete'}
+            <h3><EditableSpan onChangeTitle={onChangeTodolistTitle} title={props.title}/><ButtonFilter disabled={props.entityStatus} title={'delete'}
                                                                                                        callBack={deleteTodolist}/>
             </h3>
-            <AddItemForm addItem={addTask}/>
+            <AddItemForm disabled={props.entityStatus} addItem={addTask}/>
             {taskForTodolist.map(t => {
                 return <Task onChangeTaskTitle={onChangeTitle} task={t} key={t.id} deleteTask={deleteTask}
                              onChangeTaskStatus={onChangeTaskStatus}/>

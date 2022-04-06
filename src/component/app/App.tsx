@@ -25,6 +25,7 @@ import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import Toolbar from "@material-ui/core/Toolbar";
 import {RequestStatusType} from "./app-reducer";
+import {ErrorSnackbar} from "../errorSnackbar/ErrorSnackbar";
 
 
 
@@ -79,8 +80,8 @@ export const App = () => {
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
-                {status === "loading"&& <LinearProgress color={'secondary'} />}
             </AppBar>
+            {status === "loading"&& <LinearProgress color={'secondary'} />}
             <Container fixed>
                 <Grid container style={{padding: '20px'}}>
                     <AddItemForm addItem={addTodolist}/>
@@ -95,6 +96,7 @@ export const App = () => {
                                           tasks={tasks[tl.id]}
                                           deleteTask={deleteTask}
                                           filter={tl.filter}
+                                          entityStatus={tl.entityStatus}
                                           changeFilter={changeFilter}
                                           addTask={addTask}
                                           changeStatus={changeStatus}
@@ -107,6 +109,7 @@ export const App = () => {
                     })}
                 </Grid>
             </Container>
+            <ErrorSnackbar/>
         </div>
     );
 }

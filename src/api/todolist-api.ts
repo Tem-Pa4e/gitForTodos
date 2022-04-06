@@ -9,13 +9,7 @@ const instance = axios.create({
     }
 })
 
-type ResponseTaskType<T = {}> = {
-    data: T
-    fieldsErrors: string[]
-    messages: string[]
-    resultCode: number
-}
-type ResponseTodolistType<T = {}> = {
+export type ResponseType<T = {}> = {
     data: T
     fieldsErrors: string[]
     messages: string[]
@@ -32,25 +26,25 @@ export const todolistApi = {
         return instance.get<GetTodoType[]>('todo-lists')
     },
     createTodo(title: string) {
-        return instance.post<ResponseTodolistType<{ item: GetTodoType }>>('todo-lists', {title})
+        return instance.post<ResponseType<{ item: GetTodoType }>>('todo-lists', {title})
     },
     deleteTodo(todolistId: string) {
-        return instance.delete<ResponseTodolistType>(`todo-lists/${todolistId}`)
+        return instance.delete<ResponseType>(`todo-lists/${todolistId}`)
     },
     updateTodo(todolistId: string, title: string) {
-        return instance.put<ResponseTodolistType>(`todo-lists/${todolistId}`, {title})
+        return instance.put<ResponseType>(`todo-lists/${todolistId}`, {title})
     },
     getTasks(todolistId: string) {
         return instance.get<GetTaskType>(`todo-lists/${todolistId}/tasks`)
     },
     createTask(todolistId: string, title: string) {
-        return instance.post<ResponseTaskType<{ item: TaskDomainType }>>(`todo-lists/${todolistId}/tasks`, {title})
+        return instance.post<ResponseType<{ item: TaskDomainType }>>(`todo-lists/${todolistId}/tasks`, {title})
     },
     deleteTask(todolistId: string, taskId: string) {
-        return instance.delete<ResponseTaskType>(`todo-lists/${todolistId}/tasks/${taskId}`)
+        return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
     },
     updateTask(todolistId: string, taskId: string, model: CreatedTaskEntityType) {
-        return instance.put<ResponseTaskType<{ item: CreatedTaskEntityType }>>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
+        return instance.put<ResponseType<{ item: CreatedTaskEntityType }>>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
     }
 };
 
