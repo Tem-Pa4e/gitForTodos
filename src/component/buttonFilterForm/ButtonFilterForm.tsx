@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import { FilterType } from '../../typing/typing';
-import {ButtonFilter} from "../buttonFilter/ButtonFilter";
+import {ButtonComponent} from "../buttonComponent/ButtonComponent";
 
 type ButtonFilterFormType = {
     changeFilter: (todolistId: string, value: FilterType) => void
@@ -21,13 +21,13 @@ export const ButtonFilterForm = (props: ButtonFilterFormType) => {
     },[props.changeFilter,props.id])
     return (
         <div>
-            <ButtonFilter color={'inherit'} variant={props.filter === 'all' ? 'contained' : 'text'} title={'all'}
-                          callBack={changeAllFilter}/>
-            <ButtonFilter color={'inherit'} variant={props.filter === 'active' ? 'contained' : 'text'} title={'active'}
-                          callBack={changeActiveFilter}/>
-            <ButtonFilter color={'inherit'} variant={props.filter === 'completed' ? 'contained' : 'text'}
-                          title={'completed'}
-                          callBack={changeCompletedFilter}/>
+            <ButtonComponent color={'inherit'} variant={props.filter === 'all' ? 'contained' : 'text'} title={'all'}
+                             callBack={changeAllFilter}/>
+            <ButtonComponent color={'inherit'} variant={props.filter === 'active' ? 'contained' : 'text'} title={'active'}
+                             callBack={changeActiveFilter}/>
+            <ButtonComponent color={'inherit'} variant={props.filter === 'completed' ? 'contained' : 'text'}
+                             title={'completed'}
+                             callBack={changeCompletedFilter}/>
         </div>
     );
 };

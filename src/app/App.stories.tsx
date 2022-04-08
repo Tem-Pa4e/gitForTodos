@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import {App} from "./App";
-import {ReduxStoreProviderDecorator} from "../../state/ReduxStoreProviderDecorator";
+import {ReduxStoreProviderDecorator} from "../state/ReduxStoreProviderDecorator";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

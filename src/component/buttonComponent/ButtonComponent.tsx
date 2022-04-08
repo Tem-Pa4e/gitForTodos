@@ -1,7 +1,10 @@
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
+
 import React from 'react';
-import {Button, IconButton} from "@material-ui/core";
-import {Add, Delete} from "@material-ui/icons";
-import {RequestStatusType} from "../app/app-reducer";
+import {RequestStatusType} from "../../state/app-reducer";
 
 type ButtonPropsType = {
     title: string
@@ -11,13 +14,13 @@ type ButtonPropsType = {
     color?: "primary" | "inherit" | "secondary" | "success" | "error" | "info" | "warning"
 }
 
-export const ButtonFilter = React.memo((props: ButtonPropsType) => {
+export const ButtonComponent = React.memo((props: ButtonPropsType) => {
     let icons
     if (props.title === 'delete') {
-        icons = <IconButton size={"small"} disabled={props.disabled==='loading'} onClick={props.callBack}><Delete/></IconButton>
+        icons = <IconButton size={"small"} disabled={props.disabled==='loading'} onClick={props.callBack}><DeleteIcon /></IconButton>
     }
     if (props.title === 'added') {
-        icons = <IconButton size={"small"} disabled={props.disabled==='loading'} onClick={props.callBack}><Add/></IconButton>
+        icons = <IconButton size={"small"} disabled={props.disabled==='loading'} onClick={props.callBack}><AddIcon /></IconButton>
     }
     return props.title === 'delete' || props.title === 'added' ?
         <span>{icons}</span> :

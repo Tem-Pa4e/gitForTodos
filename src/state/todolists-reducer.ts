@@ -1,8 +1,8 @@
 import {Dispatch} from "redux";
 import {FilterType, GetTodoType} from "../typing/typing";
 import {todolistApi} from "../api/todolist-api";
-import {RequestStatusType, SetAppStatusAC, SetAppStatusAT, SetAppErrorAC, SetAppErrorAT} from "../component/app/app-reducer";
-import {handleServerAppError, handleServerNetworkError} from "../component/utils/error-utils";
+import {RequestStatusType, SetAppErrorAT, SetAppStatusAC, SetAppStatusAT} from "./app-reducer";
+import {handleServerAppError, handleServerNetworkError} from "../utils/error-utils";
 import {AxiosError} from "axios";
 
 const initialState: Array<TodolistStateType> = []
@@ -78,6 +78,9 @@ export const fetchTodosTC = () => {
                 dispatch(SetTodoAC(res.data))
                 dispatch(SetAppStatusAC('succeeded'))
             })
+            .catch((err: AxiosError)=> {
+                handleServerNetworkError(dispatch, err.message)
+            })
 
 
     }
@@ -91,13 +94,9 @@ export const removeTodoTC = (todolistId: string) => {
                 if (res.data.resultCode===0) {
                     dispatch(RemoveTodoAC(todolistId))
                     dispatch(SetAppStatusAC('succeeded'))
-                    dispatch(ChangeTodoEntityStatusAC(todolistId, 'succeeded'))
                 } else {
                     handleServerAppError(dispatch, res.data)
                 }
-            })
-            .catch((err: AxiosError)=> {
-                handleServerNetworkError(dispatch, err.message)
             })
     }
 }
@@ -108,6 +107,7 @@ export const createTodoTC = (title: string) => {
             .then(res => {
                 if (res.data.resultCode === 0) {
                     dispatch(AddTodoAC(res.data.data.item))
+
                     dispatch(SetAppStatusAC('succeeded'))
                 }else {
                     handleServerAppError<{ item: GetTodoType }>(dispatch, res.data)

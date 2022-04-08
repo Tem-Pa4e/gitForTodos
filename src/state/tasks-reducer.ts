@@ -3,8 +3,8 @@ import {Dispatch} from "redux";
 import {todolistApi} from "../api/todolist-api";
 import {AppRootStateType} from "./store";
 import {CreatedTaskEntityType, TaskDomainType, TasksStateType} from "../typing/typing";
-import {SetAppStatusAC, SetAppStatusAT, SetAppErrorAT} from "../component/app/app-reducer";
-import {handleServerAppError, handleServerNetworkError} from "../component/utils/error-utils";
+import {SetAppStatusAC, SetAppStatusAT, SetAppErrorAT} from "./app-reducer";
+import {handleServerAppError, handleServerNetworkError} from "../utils/error-utils";
 import {AxiosError} from "axios";
 
 const initialState: TasksStateType = {}

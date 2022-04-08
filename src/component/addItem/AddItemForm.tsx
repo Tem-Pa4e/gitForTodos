@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
-import {ButtonFilter} from "../buttonFilter/ButtonFilter";
-import {TextField} from "@material-ui/core";
-import {RequestStatusType} from "../app/app-reducer";
+import {ButtonComponent} from "../buttonComponent/ButtonComponent";
+import {RequestStatusType} from "../../state/app-reducer";
+import {TextField} from "@mui/material";
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
@@ -35,7 +35,7 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
     return (
         <div className={'itemForm'}>
             <TextField helperText={error} disabled={props.disabled==='loading'} size={"small"} error={!!error} value={title} onChange={onChangeTitle}
-                       onKeyPress={onKeyPressHandler}/><ButtonFilter disabled={props.disabled} title={'added'} callBack={addItem}/>
+                       onKeyPress={onKeyPressHandler}/><ButtonComponent disabled={props.disabled} title={'added'} callBack={addItem}/>
         </div>
     );
 });

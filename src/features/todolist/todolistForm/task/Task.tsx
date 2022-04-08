@@ -1,8 +1,8 @@
 import React, {ChangeEvent, useCallback} from 'react';
-import {ButtonFilter} from "../buttonFilter/ButtonFilter";
-import {EditableSpan} from "../EditableSpan/EditableSpan";
-import {Checkbox} from "@material-ui/core";
-import {TaskDomainType, TaskStatuses} from '../../typing/typing';
+import Checkbox from '@mui/material/Checkbox';
+import {TaskDomainType, TaskStatuses} from '../../../../typing/typing';
+import { EditableSpan } from '../../../../component/EditableSpan/EditableSpan';
+import { ButtonComponent } from '../../../../component/buttonComponent/ButtonComponent';
 
 type TaskPropsType = {
     task: TaskDomainType
@@ -28,8 +28,8 @@ export const Task = React.memo((props: TaskPropsType) => {
                                                                                                     checked={props.task.status === TaskStatuses.Completed}
                                                                                                     onChange={onChangeTaskStatus}/>
                 <EditableSpan
-                    onChangeTitle={onChangeTitle} title={props.task.title}/><ButtonFilter title={'delete'}
-                                                                                          callBack={deleteTask}/></li>
+                    onChangeTitle={onChangeTitle} title={props.task.title}/><ButtonComponent title={'delete'}
+                                                                                             callBack={deleteTask}/></li>
         </ul>
     );
 });
