@@ -15,12 +15,17 @@ import {
 import {FilterType, TaskStatuses} from '../../typing/typing';
 import {addTaskTC, removeTaskTC, updateTaskModelTC} from '../../state/tasks-reducer';
 import {AddItemForm} from '../../component/addItem/AddItemForm';
+import {Navigate} from "react-router-dom";
 
 export const Todolist = () => {
     const todolists = useSelector<AppRootStateType, Array<TodolistStateType>>(state => state.todolists)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const dispatch = useDispatch()
 
     useEffect(() => {
+        if (!isLoggedIn) {
+            return
+        }
         dispatch(fetchTodosTC())
     }, [])
     const deleteTodolist = useCallback((todolistId: string) => {
@@ -47,6 +52,9 @@ export const Todolist = () => {
     const changeTodolistTitle = useCallback((todolistId: string, title: string) => {
         dispatch(updateTodoTitleTC(todolistId, title))
     }, [dispatch])
+    if (!isLoggedIn) {
+        return <Navigate to={'/login'}/>
+    }
     return (
         <>
             <Grid container style={{padding: '20px'}}>
