@@ -5,4 +5,7 @@ li {
 .is-done {
   opacity: 0.5;
 }
-
+.App {
+  min-height: 100vh;
+  background-image: url("https://kartinkin.net/uploads/posts/2021-07/1626160683_36-kartinkin-com-p-fon-dlya-chata-telegramm-krasivo-36.jpg");
+}

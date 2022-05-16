@@ -12,18 +12,19 @@ type ButtonPropsType = {
     disabled?: RequestStatusType
     variant?: 'text' | 'outlined' | 'contained'
     color?: "primary" | "inherit" | "secondary" | "success" | "error" | "info" | "warning"
+
 }
 
 export const ButtonComponent = React.memo((props: ButtonPropsType) => {
     let icons
     if (props.title === 'delete') {
-        icons = <IconButton size={"small"} disabled={props.disabled==='loading'} onClick={props.callBack}><DeleteIcon /></IconButton>
+        icons = <IconButton  size={"small"} disabled={props.disabled==='loading'} onClick={props.callBack}><DeleteIcon style={{color: 'white'}} /></IconButton>
     }
     if (props.title === 'added') {
-        icons = <IconButton size={"small"} disabled={props.disabled==='loading'} onClick={props.callBack}><AddIcon /></IconButton>
+        icons = <IconButton size={"small"}  disabled={props.disabled==='loading'} onClick={props.callBack}><AddIcon style={{color: 'white'}} fontSize={'large'}/></IconButton>
     }
     return props.title === 'delete' || props.title === 'added' ?
         <span>{icons}</span> :
-        <Button size={'small'} color={props.color} variant={props.variant}
+        <Button size={'small'} style={{color: 'white',margin: '3px',padding: '3px'}} color={props.color} variant={props.variant}
                 onClick={props.callBack}>{props.title}</Button>
 });

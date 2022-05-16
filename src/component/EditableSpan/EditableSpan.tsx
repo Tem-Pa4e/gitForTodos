@@ -31,8 +31,8 @@ export const EditableSpan = React.memo((props: EditableSpanPropsType) => {
 
     return editMode ?
         <TextField size={'small'} error={!!error} helperText={error} value={title} onChange={onChangeTitle} autoFocus
-                   onBlur={offEditMode}
+                   onBlur={offEditMode} color={'success'}
                    variant={'standard'}/> :
-        <span onDoubleClick={activateEditMode}>{props.title}</span>
+        <span style={{color: 'aliceblue'}} onDoubleClick={activateEditMode}>{props.title}</span>
 });
 

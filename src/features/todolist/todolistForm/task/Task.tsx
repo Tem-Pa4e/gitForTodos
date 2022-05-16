@@ -23,7 +23,7 @@ export const Task = React.memo((props: TaskPropsType) => {
     }, [props.deleteTask, props.task.id])
     return (
         <ul>
-            <li className={props.task.status === TaskStatuses.Completed ? 'is-done' : ''}><Checkbox color={'primary'}
+            <li className={props.task.status === TaskStatuses.Completed ? 'is-done' : ''}><Checkbox style={{color: 'white'}} color={'success'}
                                                                                                     size={'small'}
                                                                                                     checked={props.task.status === TaskStatuses.Completed}
                                                                                                     onChange={onChangeTaskStatus}/>

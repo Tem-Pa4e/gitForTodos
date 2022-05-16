@@ -20,12 +20,12 @@ export const ButtonFilterForm = (props: ButtonFilterFormType) => {
         props.changeFilter(props.id, 'completed')
     },[props.changeFilter,props.id])
     return (
-        <div>
-            <ButtonComponent color={'inherit'} variant={props.filter === 'all' ? 'contained' : 'text'} title={'all'}
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+            <ButtonComponent color={'inherit'} variant={props.filter === 'all' ? 'outlined' : 'text'} title={'all'}
                              callBack={changeAllFilter}/>
-            <ButtonComponent color={'inherit'} variant={props.filter === 'active' ? 'contained' : 'text'} title={'active'}
+            <ButtonComponent color={'inherit'} variant={props.filter === 'active' ? 'outlined' : 'text'} title={'active'}
                              callBack={changeActiveFilter}/>
-            <ButtonComponent color={'inherit'} variant={props.filter === 'completed' ? 'contained' : 'text'}
+            <ButtonComponent color={'inherit'} variant={props.filter === 'completed' ? 'outlined' : 'text'}
                              title={'completed'}
                              callBack={changeCompletedFilter}/>
         </div>

@@ -16,6 +16,7 @@ import {FilterType, TaskStatuses} from '../../typing/typing';
 import {addTaskTC, removeTaskTC, updateTaskModelTC} from '../../state/tasks-reducer';
 import {AddItemForm} from '../../component/addItem/AddItemForm';
 import {Navigate} from "react-router-dom";
+import './Todolist.css'
 
 export const Todolist = () => {
     const todolists = useSelector<AppRootStateType, Array<TodolistStateType>>(state => state.todolists)
@@ -58,12 +59,14 @@ export const Todolist = () => {
     return (
         <>
             <Grid container style={{padding: '20px'}}>
-                <AddItemForm addItem={addTodolist}/>
+                <div className={'todoItem'}>
+                    <AddItemForm style={{border: '3px solid black', borderRadius: '7px', backgroundColor: 'rgba(0,0,0,0.7)'}} addItem={addTodolist}/>
+                </div>
             </Grid>
             <Grid container spacing={3}>
                 {todolists.map(tl => {
                     return <Grid item>
-                        <Paper style={{padding: '10px'}}>
+                        <Paper style={{backgroundColor: 'rgba(0,0,0,0.6)'}}>
                             <TodolistForm key={tl.id}
                                           todolist={tl}
                                           deleteTask={deleteTask}

@@ -13,6 +13,7 @@ import {loginTC} from "../../state/login-Reducer";
 import {AppRootStateType} from "../../state/store";
 import {Navigate} from "react-router-dom";
 import {LoginParamsType} from "../../api/todolist-api";
+import './Login.css'
 
 export const Login = () => {
 
@@ -48,12 +49,12 @@ export const Login = () => {
     }
 
 
-    return <Grid container justifyContent={'center'}>
+    return <Grid container justifyContent={'center'} >
         <Grid item justifyContent={'center'}>
-            <FormControl>
+            <FormControl className={'loginFormBlock'} style={{marginTop: '25%',padding: '0 20px'}}>
                 <FormLabel>
                     <p>To log in get registered
-                        <a href={'https://social-network.samuraijs.com/'}
+                        <a style={{color: 'aquamarine'}} href={'https://social-network.samuraijs.com/'}
                            target={'_blank'}> here
                         </a>
                     </p>
@@ -62,17 +63,17 @@ export const Login = () => {
                     <p>Password: free</p>
                 </FormLabel>
                 <form onSubmit={formik.handleSubmit}>
-                    <FormGroup>
-                        <TextField label="Email" margin="normal" {...formik.getFieldProps('email')}/>
+                    <FormGroup className={'loginFormBox'}>
+                        <TextField color={'success'} InputLabelProps={{style: {color: 'white'}}} label="Email" margin="normal" {...formik.getFieldProps('email')}/>
                         {formik.touched.email && formik.errors.email && <div style={{color: 'red'}}>{formik.errors.email}</div>}
-                        <TextField type="password" label="Password"
+                        <TextField InputLabelProps={{style: {color: 'white'}}} color={'success'} type="password" label="Password"
                                    margin="normal"
                                    {...formik.getFieldProps('password')}
                         />
                         {formik.touched.password && formik.errors.password && <div style={{color: 'red'}}>{formik.errors.password}</div>}
-                        <FormControlLabel label={'Remember me'}
-                                          control={<Checkbox {...formik.getFieldProps('rememberMe')}/>}/>
-                        <Button type={'submit'} variant={'contained'} color={'primary'}>
+                        <FormControlLabel style={{color: 'white'}} label={'Remember me'}
+                                          control={<Checkbox style={{color: 'white'}}  {...formik.getFieldProps('rememberMe')}/>}/>
+                        <Button style={{margin: '10px 0'}} type={'submit'} variant={'contained'} color={'primary'}>
                             Login
                         </Button>
                     </FormGroup>

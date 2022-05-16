@@ -9,6 +9,8 @@ import {FilterType, TasksStateType, TaskStatuses} from "../../../typing/typing";
 import { AddItemForm } from '../../../component/addItem/AddItemForm';
 import {ButtonFilterForm} from "../../../component/buttonFilterForm/ButtonFilterForm";
 import {Task} from "./task/Task";
+import './TodolistForm.css'
+
 
 
 type TodolistPropsType = {
@@ -63,7 +65,7 @@ export const TodolistForm = React.memo((props: TodolistPropsType) => {
                 <ButtonComponent disabled={props.todolist.entityStatus} title={'delete'}
                                  callBack={deleteTodolist}/>
             </h3>
-            <AddItemForm disabled={props.todolist.entityStatus} addItem={addTask}/>
+            <AddItemForm style={{border: '3px solid black', borderRadius: '7px',backgroundColor: 'rgba(0,0,0,0.7)'}} disabled={props.todolist.entityStatus} addItem={addTask}/>
             {taskForTodolist.map(t => {
                 return <Task onChangeTaskTitle={onChangeTitle} task={t} key={t.id} deleteTask={deleteTask}
                              onChangeTaskStatus={onChangeTaskStatus}/>

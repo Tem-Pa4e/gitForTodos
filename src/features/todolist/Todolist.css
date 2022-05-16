@@ -1,0 +1,8 @@
+.todoItem input {
+    color: white;
+}
+
+.todoItem {
+    padding: 25px 0;
+    margin-left: -50px;
+}

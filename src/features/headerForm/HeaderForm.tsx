@@ -8,6 +8,7 @@ import AppBar from "@mui/material/AppBar";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../state/store";
 import {logoutTC} from "../../state/login-Reducer";
+import './HeaderForm.css'
 
 export const HeaderForm = () => {
 
@@ -18,20 +19,9 @@ export const HeaderForm = () => {
     }
 
     return (
-            <AppBar position="sticky">
-                <Toolbar>
-                    <IconButton
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu">
-                        <MenuIcon/>
-                    </IconButton>
-                    <Typography variant="h6">
-                        Menu
-                    </Typography>
-                    {isLoggedIn && <Button onClick={logoutHandler} color="inherit">Logout</Button>}
-                </Toolbar>
-            </AppBar>
+        <div className={'headerBlock'}>
+            {isLoggedIn && <Button onClick={logoutHandler} variant={'contained'} color="primary">Logout</Button>}
+        </div>
     );
 };
 

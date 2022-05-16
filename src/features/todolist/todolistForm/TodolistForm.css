@@ -1,0 +1,12 @@
+.todolistForm {
+    box-shadow:10px 10px 5px 2px rgba(0,0,0,0.7);
+    padding: 10px;
+}
+.todolistForm h3 {
+    padding-left: 30px;
+    color: aliceblue;;
+}
+
+.todolistForm input {
+    color: white;
+}

@@ -2,10 +2,12 @@ import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
 import {ButtonComponent} from "../buttonComponent/ButtonComponent";
 import {RequestStatusType} from "../../state/app-reducer";
 import {TextField} from "@mui/material";
+import './AddItemForm.css'
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
     disabled?: RequestStatusType
+    style?: object
 }
 
 export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
@@ -34,7 +36,7 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
     }
     return (
         <div className={'itemForm'}>
-            <TextField helperText={error} disabled={props.disabled==='loading'} size={"small"} error={!!error} value={title} onChange={onChangeTitle}
+            <TextField style={props.style} color={'success'} helperText={error} disabled={props.disabled==='loading'} size={"small"} error={!!error} value={title} onChange={onChangeTitle}
                        onKeyPress={onKeyPressHandler}/><ButtonComponent disabled={props.disabled} title={'added'} callBack={addItem}/>
         </div>
     );

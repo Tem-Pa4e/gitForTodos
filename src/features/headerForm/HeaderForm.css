@@ -1,0 +1,11 @@
+.headerBlock {
+    width: 100%;
+    height: 60px;
+    border-bottom: 3px solid white;
+    align-items: center;
+    justify-content: flex-end;
+    display: flex;
+}
+.headerBlock button {
+    margin-right: 15px;
+}
