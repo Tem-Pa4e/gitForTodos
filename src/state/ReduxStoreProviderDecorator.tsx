@@ -4,7 +4,7 @@ import {combineReducers, createStore} from "redux";
 import {tasksReducer} from './tasks-reducer';
 import {todolistsReducer} from "./todolists-reducer";
 import {v1} from 'uuid';
-import {TaskPriorities, TaskStatuses} from "../typing/typing";
+import {TaskPriorities, TaskStatuses} from "typing/typing";
 
 
 const rootReducer = combineReducers({
@@ -19,7 +19,7 @@ const initialGlobalState = {
         {id: "todolistId2", title: "What to buy", order: 0, addedDate: '', filter: "all"}
     ],
     tasks: {
-        ["todolistId1"]: [
+        "todolistId1": [
             {
                 id: v1(), title: "HTML&CSS", status: TaskStatuses.Completed,
                 description: '',
@@ -41,7 +41,7 @@ const initialGlobalState = {
                 order: 0
             }
         ],
-        ["todolistId2"]: [
+        "todolistId2": [
             {
                 id: v1(), title: "Milk", status: TaskStatuses.Completed,
                 description: '',

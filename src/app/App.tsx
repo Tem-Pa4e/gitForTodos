@@ -1,15 +1,15 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import {ErrorSnackbar} from "../component/errorSnackbar/ErrorSnackbar";
+import {ErrorSnackbar} from "component/errorSnackbar/ErrorSnackbar";
 import Container from "@mui/material/Container";
-import {Login} from "../features/login/Login";
+import {Login} from "features/login/Login";
 import {Navigate, Route, Routes} from "react-router-dom";
-import {StatusForm} from "../component/statusForm/StatusForm";
-import {HeaderForm} from "../features/headerForm/HeaderForm";
-import {Todolist} from "../features/todolist/Todolist";
+import {StatusForm} from "component/statusForm/StatusForm";
+import {HeaderForm} from "features/headerForm/HeaderForm";
+import {Todolist} from "features/todolist/Todolist";
 import {useDispatch, useSelector} from "react-redux";
-import {initializeAppTC, RequestStatusType} from "../state/app-reducer";
-import {AppRootStateType} from "../state/store";
+import {initializeAppTC, RequestStatusType} from "state/app-reducer";
+import {AppRootStateType} from "state/store";
 
 
 export const App = () => {

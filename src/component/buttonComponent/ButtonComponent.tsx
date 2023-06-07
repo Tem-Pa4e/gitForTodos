@@ -4,7 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 
 import React from 'react';
-import {RequestStatusType} from "../../state/app-reducer";
+import {RequestStatusType} from "state/app-reducer";
 
 type ButtonPropsType = {
     title: string

@@ -6,3 +6,8 @@
     padding: 25px 0;
     margin-left: -50px;
 }
+
+.todoData {
+    background-color: rgba(0,0,0,0.7);
+    margin-right: 35px;
+}
