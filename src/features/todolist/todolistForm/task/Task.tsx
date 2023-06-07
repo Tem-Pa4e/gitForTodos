@@ -1,8 +1,8 @@
 import React, {ChangeEvent, useCallback} from 'react';
 import Checkbox from '@mui/material/Checkbox';
-import {TaskDomainType, TaskStatuses} from '../../../../typing/typing';
-import { EditableSpan } from '../../../../component/EditableSpan/EditableSpan';
-import { ButtonComponent } from '../../../../component/buttonComponent/ButtonComponent';
+import {TaskDomainType, TaskStatuses} from 'typing/typing';
+import { EditableSpan } from 'component/EditableSpan/EditableSpan';
+import { ButtonComponent } from 'component/buttonComponent/ButtonComponent';
 
 type TaskPropsType = {
     task: TaskDomainType

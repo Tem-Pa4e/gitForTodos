@@ -3,18 +3,17 @@ import {useDispatch, useSelector} from "react-redux";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import {TodolistForm} from "./todolistForm/TodolistForm";
-import {AppRootStateType} from "../../state/store";
+import {AppRootStateType} from "state/store";
 import {
-    ChangeTodoFilterAC,
     createTodoTC,
     fetchTodosTC,
-    removeTodoTC,
+    removeTodoTC, todolistsActions,
     TodolistStateType,
     updateTodoTitleTC
-} from '../../state/todolists-reducer';
-import {FilterType, TaskStatuses} from '../../typing/typing';
-import {addTaskTC, removeTaskTC, updateTaskModelTC} from '../../state/tasks-reducer';
-import {AddItemForm} from '../../component/addItem/AddItemForm';
+} from 'state/todolists-reducer';
+import {FilterType, TaskStatuses} from 'typing/typing';
+import {addTaskTC, removeTaskTC, updateTaskModelTC} from 'state/tasks-reducer';
+import {AddItemForm} from 'component/addItem/AddItemForm';
 import {Navigate} from "react-router-dom";
 import './Todolist.css'
 
@@ -28,7 +27,7 @@ export const Todolist = () => {
             return
         }
         dispatch(fetchTodosTC())
-    }, [])
+    }, [isLoggedIn, dispatch])
     const deleteTodolist = useCallback((todolistId: string) => {
         dispatch(removeTodoTC(todolistId))
     }, [dispatch])
@@ -41,8 +40,8 @@ export const Todolist = () => {
     const addTask = useCallback((todolistId: string, title: string) => {
         dispatch(addTaskTC(todolistId, title))
     }, [dispatch])
-    const changeFilter = useCallback((todolistId: string, value: FilterType) => {
-        dispatch(ChangeTodoFilterAC(todolistId, value))
+    const changeFilter = useCallback((id: string, filter: FilterType) => {
+        dispatch(todolistsActions.changeTodolistFilter({id, filter}))
     }, [dispatch])
     const addTodolist = useCallback((title: string) => {
         dispatch(createTodoTC(title))
@@ -66,7 +65,7 @@ export const Todolist = () => {
             <Grid container spacing={3}>
                 {todolists.map(tl => {
                     return <Grid item>
-                        <Paper style={{backgroundColor: 'rgba(0,0,0,0.6)'}}>
+                        <Paper style={{backgroundColor: 'rgba(0,0,0,0.7)', marginRight: '35px'}}>
                             <TodolistForm key={tl.id}
                                           todolist={tl}
                                           deleteTask={deleteTask}

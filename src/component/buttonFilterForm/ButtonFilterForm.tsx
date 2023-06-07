@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import { FilterType } from '../../typing/typing';
+import { FilterType } from 'typing/typing';
 import {ButtonComponent} from "../buttonComponent/ButtonComponent";
 
 type ButtonFilterFormType = {

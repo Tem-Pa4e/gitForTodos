@@ -1,5 +1,5 @@
 import axios from "axios";
-import {CreatedTaskEntityType, GetTodoType, TaskDomainType} from "../typing/typing";
+import {CreatedTaskEntityType, GetTodoType, TaskDomainType} from "typing/typing";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',

@@ -9,10 +9,10 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
-import {loginTC} from "../../state/login-Reducer";
-import {AppRootStateType} from "../../state/store";
+import {loginTC} from "state/auth-reducer";
+import {AppRootStateType} from "state/store";
 import {Navigate} from "react-router-dom";
-import {LoginParamsType} from "../../api/todolist-api";
+import {LoginParamsType} from "api/todolist-api";
 import './Login.css'
 
 export const Login = () => {
@@ -55,7 +55,7 @@ export const Login = () => {
                 <FormLabel>
                     <p>To log in get registered
                         <a style={{color: 'aquamarine'}} href={'https://social-network.samuraijs.com/'}
-                           target={'_blank'}> here
+                           target={'_blank'} rel="noreferrer"> here
                         </a>
                     </p>
                     <p>or use common test account credentials:</p>

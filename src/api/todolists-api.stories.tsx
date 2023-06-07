@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {todolistApi} from "./todolist-api";
-import {CreatedTaskEntityType} from "../typing/typing";
+import {CreatedTaskEntityType} from "typing/typing";
 
 export default {
     title: 'API'
