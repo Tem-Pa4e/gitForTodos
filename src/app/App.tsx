@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import './App.css';
 import {ErrorSnackbar} from "component/errorSnackbar/ErrorSnackbar";
 import Container from "@mui/material/Container";
-import {Login} from "features/login/Login";
+import {Login} from "features/auth/Login";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {StatusForm} from "component/statusForm/StatusForm";
 import {HeaderForm} from "features/headerForm/HeaderForm";

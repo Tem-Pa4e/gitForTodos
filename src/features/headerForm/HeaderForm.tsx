@@ -1,13 +1,13 @@
 import React from 'react';
 import Button from "@mui/material/Button";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "state/store";
-import {logoutTC} from "state/auth-reducer";
+import {logoutTC} from "features/auth/auth.reducer";
 import './HeaderForm.css'
+import {selectIsLoggedIn} from "features/auth/auth.selector";
 
 export const HeaderForm = () => {
 
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
+    const isLoggedIn = useSelector(selectIsLoggedIn)
     const dispatch = useDispatch()
     const logoutHandler = () => {
         dispatch(logoutTC())

@@ -2,7 +2,7 @@ import {
     todolistsActions,
     todolistsReducer,
     TodolistStateType
-} from './todolists-reducer';
+} from 'features/todolist/todolists-reducer';
 import {v1} from 'uuid';
 import {FilterType} from "typing/typing";
 

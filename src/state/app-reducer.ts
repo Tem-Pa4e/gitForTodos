@@ -1,8 +1,7 @@
 import {Dispatch} from "redux";
 import {authAPI} from "api/todolist-api";
 import {handleServerAppError, handleServerNetworkError} from "utils/error-utils";
-import {AxiosError} from "axios";
-import {authActions} from "state/auth-reducer";
+import {authActions} from "features/auth/auth.reducer";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AppThunk} from "state/store";
 
@@ -43,8 +42,8 @@ export const initializeAppTC = (): AppThunk => (dispatch: Dispatch) => {
             handleServerAppError(dispatch, res.data)
         }
     })
-        .catch((err: AxiosError)=> {
-            handleServerNetworkError(dispatch, err.message)
+        .catch((err)=> {
+            handleServerNetworkError(dispatch, err)
         })
         .finally(()=> {
             dispatch(appActions.setAppIsInitialized({isInitialized: true}))

@@ -1,9 +1,9 @@
 import {authAPI, LoginParamsType} from "api/todolist-api";
 import {handleServerAppError, handleServerNetworkError} from "utils/error-utils";
-import {AxiosError} from "axios";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {AppThunk} from "./store";
+import {AppThunk} from "state/store";
 import {appActions} from "state/app-reducer";
+import {clearTasksAndTodolists} from "common/actions/common.actions";
 
 const initialState = {
     isLoggedIn: false
@@ -34,8 +34,8 @@ export const loginTC = (data: LoginParamsType): AppThunk => (dispatch) => {
                 handleServerAppError(dispatch, res.data)
             }
         })
-        .catch((err: AxiosError) => {
-            handleServerNetworkError(dispatch, err.message)
+        .catch((err) => {
+            handleServerNetworkError(dispatch, err)
         })
 }
 export const logoutTC = (): AppThunk => (dispatch) => {
@@ -45,15 +45,14 @@ export const logoutTC = (): AppThunk => (dispatch) => {
             if (res.data.resultCode === 0) {
                 dispatch(authActions.setIsLoggedIn({isLoggedIn: false}))
                 dispatch(appActions.setAppStatus({status: 'succeeded'}))
+                dispatch(clearTasksAndTodolists())
             } else {
                 handleServerAppError(dispatch, res.data)
             }
         })
-        .catch((err: AxiosError) => {
-            handleServerNetworkError(dispatch, err.message)
+        .catch((err) => {
+            handleServerNetworkError(dispatch, err)
         })
 }
-
-// types
 
 

@@ -1,10 +1,11 @@
 import {Dispatch} from "redux";
 import {FilterType, GetTodoType} from "typing/typing";
 import {todolistApi} from "api/todolist-api";
-import {appActions, RequestStatusType} from "./app-reducer";
+import {appActions, RequestStatusType} from "state/app-reducer";
 import {handleServerAppError, handleServerNetworkError} from "utils/error-utils";
-import {AxiosError} from "axios";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {clearTasksAndTodolists} from "common/actions/common.actions";
+import {tasksThunks} from "features/todolist/tasks.reducer";
 
 const initialState: Array<TodolistStateType> = []
 
@@ -38,13 +39,15 @@ const slice = createSlice({
         }),
         setTodolist: ((state, action: PayloadAction<{ todolists: Array<GetTodoType> }>) => {
             return action.payload.todolists.map((tl) => {
-                return {
-                    ...tl,
-                    filter: 'all',
-                    entityStatus: 'idle'
-                }
+                return {...tl, filter: 'all', entityStatus: 'idle'}
             })
         }),
+    },
+    extraReducers: builder => {
+        builder
+            .addCase(clearTasksAndTodolists.type, () => {
+                return []
+            })
     }
 })
 
@@ -52,15 +55,21 @@ export const todolistsReducer = slice.reducer
 export const todolistsActions = slice.actions
 
 export const fetchTodosTC = () => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: any) => {
         dispatch(appActions.setAppStatus({status: 'loading'}))
         todolistApi.getTodos()
             .then(res => {
                 dispatch(todolistsActions.setTodolist({todolists: res.data}))
                 dispatch(appActions.setAppStatus({status: 'succeeded'}))
+                return res.data
             })
-            .catch((err: AxiosError) => {
-                handleServerNetworkError(dispatch, err.message)
+            .then((todolists) => {
+                todolists.forEach((tl) => {
+                    dispatch(tasksThunks.fetchTasks(tl.id))
+                })
+            })
+            .catch((err) => {
+                handleServerNetworkError(dispatch, err)
             })
 
 
@@ -94,8 +103,8 @@ export const createTodoTC = (title: string) => {
                     handleServerAppError<{ item: GetTodoType }>(dispatch, res.data)
                 }
             })
-            .catch((err: AxiosError) => {
-                handleServerNetworkError(dispatch, err.message)
+            .catch((err) => {
+                handleServerNetworkError(dispatch, err)
             })
     }
 }
@@ -111,8 +120,8 @@ export const updateTodoTitleTC = (id: string, title: string) => {
                     handleServerAppError(dispatch, res.data)
                 }
             })
-            .catch((err: AxiosError) => {
-                handleServerNetworkError(dispatch, err.message)
+            .catch((err) => {
+                handleServerNetworkError(dispatch, err)
             })
     }
 }
