@@ -1,5 +1,5 @@
 import axios from "axios";
-import {CreatedTaskEntityType, GetTodoType, TaskDomainType} from "typing/typing";
+import {CreatedTaskEntityType, GetTodoType, TaskType} from "typing/typing";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
@@ -17,7 +17,7 @@ export type ResponseType<T = {}> = {
 }
 type GetTaskType = {
     error: string
-    items: TaskDomainType[]
+    items: TaskType[]
     totalCount: number
 }
 
@@ -38,7 +38,7 @@ export const todolistApi = {
         return instance.get<GetTaskType>(`todo-lists/${todolistId}/tasks`)
     },
     createTask(todolistId: string, title: string) {
-        return instance.post<ResponseType<{ item: TaskDomainType }>>(`todo-lists/${todolistId}/tasks`, {title})
+        return instance.post<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistId}/tasks`, {title})
     },
     deleteTask(todolistId: string, taskId: string) {
         return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)

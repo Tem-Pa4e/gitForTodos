@@ -1,7 +1,7 @@
 
 export type FilterType = 'all' | 'active' | 'completed'
 export type TasksStateType = {
-    [key: string]: Array<TaskDomainType>
+    [key: string]: Array<TaskType>
 }
 
 export enum TaskStatuses {
@@ -17,7 +17,7 @@ export enum TaskPriorities {
     Urgently = 3,
     Later = 4
 }
-export type TaskDomainType = {
+export type TaskType = {
     description: string
     title: string
     status: TaskStatuses
@@ -43,5 +43,22 @@ export type GetTodoType = {
     id: string
     order: number
     title: string
+}
+type UpdateTaskModelType = {
+    title?: string
+    description?: string
+    status?: number
+    priority?: number
+    startDate?: string
+    deadline?: string
+}
+export interface IRemoveTaskArgs {
+    id: string,
+    taskId: string
+}
+export interface IUpdateTaskArgs {
+    id: string,
+    taskId: string,
+    model: UpdateTaskModelType
 }
 

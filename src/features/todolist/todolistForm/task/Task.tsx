@@ -1,11 +1,11 @@
 import React, {ChangeEvent, useCallback} from 'react';
 import Checkbox from '@mui/material/Checkbox';
-import {TaskDomainType, TaskStatuses} from 'typing/typing';
-import { EditableSpan } from 'component/EditableSpan/EditableSpan';
-import { ButtonComponent } from 'component/buttonComponent/ButtonComponent';
+import {TaskStatuses, TaskType} from 'typing/typing';
+import {EditableSpan} from 'component/EditableSpan/EditableSpan';
+import {ButtonComponent} from 'component/buttonComponent/ButtonComponent';
 
 type TaskPropsType = {
-    task: TaskDomainType
+    task: TaskType
     deleteTask: (id: string) => void
     onChangeTaskStatus: (id: string, value: TaskStatuses) => void
     onChangeTaskTitle: (id: string, title: string) => void

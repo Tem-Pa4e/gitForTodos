@@ -1,8 +1,8 @@
 import React from 'react';
 import {Provider} from "react-redux";
 import {combineReducers, createStore} from "redux";
-import {tasksReducer} from './tasks-reducer';
-import {todolistsReducer} from "./todolists-reducer";
+import {tasksReducer} from 'features/todolist/tasks.reducer';
+import {todolistsReducer} from "features/todolist/todolists-reducer";
 import {v1} from 'uuid';
 import {TaskPriorities, TaskStatuses} from "typing/typing";
 
