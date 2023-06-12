@@ -1,8 +1,9 @@
 import React, {ChangeEvent, useCallback} from 'react';
 import Checkbox from '@mui/material/Checkbox';
-import {TaskStatuses, TaskType} from 'typing/typing';
-import {EditableSpan} from 'component/EditableSpan/EditableSpan';
-import {ButtonComponent} from 'component/buttonComponent/ButtonComponent';
+import {TaskType} from 'typing/typing';
+import {EditableSpan} from 'common/components/EditableSpan/EditableSpan';
+import {ButtonComponent} from 'common/components/buttonComponent/ButtonComponent';
+import {TaskStatuses} from "common/enums/common.enums";
 
 type TaskPropsType = {
     task: TaskType

@@ -1,20 +1,20 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import {ErrorSnackbar} from "component/errorSnackbar/ErrorSnackbar";
+import {ErrorSnackbar} from "common/components/errorSnackbar/ErrorSnackbar";
 import Container from "@mui/material/Container";
 import {Login} from "features/auth/Login";
 import {Navigate, Route, Routes} from "react-router-dom";
-import {StatusForm} from "component/statusForm/StatusForm";
+import {StatusForm} from "common/components/statusForm/StatusForm";
 import {HeaderForm} from "features/headerForm/HeaderForm";
 import {Todolist} from "features/todolist/Todolist";
 import {useDispatch, useSelector} from "react-redux";
-import {initializeAppTC, RequestStatusType} from "state/app-reducer";
-import {AppRootStateType} from "state/store";
+import {initializeAppTC} from "app/app-reducer";
+import {selectAppIsInitialized, selectAppStatus} from "app/app.selectors";
 
 
 export const App = () => {
-    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
-    const isInitialized = useSelector<AppRootStateType, boolean>(state => state.app.isInitialized)
+    const status = useSelector(selectAppStatus)
+    const isInitialized = useSelector(selectAppIsInitialized)
     const dispatch = useDispatch()
 
     useEffect(() => {

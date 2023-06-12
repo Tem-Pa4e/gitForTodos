@@ -1,11 +1,11 @@
-import {todolistApi} from "api/todolist-api";
-import {CreatedTaskEntityType, IUpdateTaskArgs, IRemoveTaskArgs, TasksStateType, TaskType} from "typing/typing";
-import {handleServerAppError, handleServerNetworkError} from "utils/error-utils";
-import {appActions} from "state/app-reducer";
+import {CreatedTaskEntityType, IRemoveTaskArgs, IUpdateTaskArgs, TasksStateType, TaskType,} from "typing/typing";
+import {createAppAsyncThunk, handleServerAppError, handleServerNetworkError} from "common/utils";
+import {appActions} from "app/app-reducer";
 import {createSlice} from "@reduxjs/toolkit";
-import {todolistsActions} from "features/todolist/todolists-reducer";
+import {todolistsThunks} from "features/todolist/todolists-reducer";
 import {clearTasksAndTodolists} from "common/actions/common.actions";
-import {createAppAsyncThunk} from "utils/create-app-async-thunk";
+import {ResultCode} from "common/enums/common.enums";
+import {todolistApi} from "./todolist.api";
 
 const initialState: TasksStateType = {}
 
@@ -25,8 +25,8 @@ const addTask = createAppAsyncThunk<{ task: TaskType }, { id: string, title: str
     const {dispatch, rejectWithValue} = thunkAPI
     try {
         dispatch(appActions.setAppStatus({status: 'loading'}))
-        const res = await todolistApi.createTask(arg.id, arg.title)
-        if (res.data.resultCode === 0) {
+        const res = await todolistApi.addTask(arg.id, arg.title)
+        if (res.data.resultCode === ResultCode.Success) {
             dispatch(appActions.setAppStatus({status: 'succeeded'}))
             return {task: res.data.data.item}
         } else {
@@ -42,8 +42,8 @@ const removeTask = createAppAsyncThunk<IRemoveTaskArgs, IRemoveTaskArgs>('tasks/
     const {dispatch, rejectWithValue} = thunkAPI
     try {
         dispatch(appActions.setAppStatus({status: 'loading'}))
-        const res = await todolistApi.deleteTask(arg.id, arg.taskId)
-        if (res.data.resultCode === 0) {
+        const res = await todolistApi.removeTask(arg.id, arg.taskId)
+        if (res.data.resultCode === ResultCode.Success) {
             dispatch(appActions.setAppStatus({status: 'succeeded'}))
             return arg
         } else {
@@ -66,7 +66,6 @@ const updateTask = createAppAsyncThunk<IUpdateTaskArgs, IUpdateTaskArgs>('tasks/
             dispatch(appActions.setAppError({error: 'Task not found in the state'}))
             return rejectWithValue(null)
         }
-
         const apiModel: CreatedTaskEntityType = {
             title: task.title,
             startDate: task.startDate,
@@ -76,16 +75,14 @@ const updateTask = createAppAsyncThunk<IUpdateTaskArgs, IUpdateTaskArgs>('tasks/
             status: task.status,
             ...arg.model
         }
-
         const res = await todolistApi.updateTask(arg.id, arg.taskId, apiModel)
-        if (res.data.resultCode === 0) {
+        if (res.data.resultCode === ResultCode.Success) {
             dispatch(appActions.setAppStatus({status: 'succeeded'}))
             return arg
         } else {
             handleServerAppError<{ item: CreatedTaskEntityType }>(dispatch, res.data)
             return rejectWithValue(null)
         }
-
     } catch (e) {
         handleServerNetworkError(e, dispatch)
         return rejectWithValue(null)
@@ -98,13 +95,13 @@ const slice = createSlice({
     reducers: {},
     extraReducers: builder => {
         builder
-            .addCase(todolistsActions.addTodolist, ((state, action) => {
+            .addCase(todolistsThunks.addTodolist.fulfilled, ((state, action) => {
                 state[action.payload.todolist.id] = []
             }))
-            .addCase(todolistsActions.removeTodolist, ((state, action) => {
+            .addCase(todolistsThunks.removeTodolist.fulfilled, ((state, action) => {
                 delete state[action.payload.id]
             }))
-            .addCase(todolistsActions.setTodolist, ((state, action) => {
+            .addCase(todolistsThunks.fetchTodolists.fulfilled, ((state, action) => {
                 action.payload.todolists.forEach((tl) => {
                     state[tl.id] = []
                 })

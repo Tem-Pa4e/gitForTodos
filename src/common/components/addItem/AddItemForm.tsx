@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
-import {ButtonComponent} from "../buttonComponent/ButtonComponent";
-import {RequestStatusType} from "state/app-reducer";
+import {ButtonComponent} from "common/components/buttonComponent/ButtonComponent";
+import {RequestStatusType} from "app/app-reducer";
 import {TextField} from "@mui/material";
 import './AddItemForm.css'
 

@@ -4,8 +4,7 @@ import {combineReducers, createStore} from "redux";
 import {tasksReducer} from 'features/todolist/tasks.reducer';
 import {todolistsReducer} from "features/todolist/todolists-reducer";
 import {v1} from 'uuid';
-import {TaskPriorities, TaskStatuses} from "typing/typing";
-
+import {TaskPriorities, TaskStatuses} from 'common/enums/common.enums';
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,

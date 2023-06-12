@@ -1,5 +1,5 @@
+import { todolistApi } from 'features/todolist/todolist.api';
 import React, {useEffect, useState} from 'react'
-import {todolistApi} from "./todolist-api";
 import {CreatedTaskEntityType} from "typing/typing";
 
 export default {
@@ -9,7 +9,7 @@ export default {
 export const GetTodolists = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistApi.getTodos()
+        todolistApi.getTodolists()
             .then(res=> {
                 setState(res.data)
             })
@@ -20,7 +20,7 @@ export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
         const title = "HTML"
-        todolistApi.createTodo(title)
+        todolistApi.addTodolist(title)
             .then(res=> {
                 setState(res.data.data.item)
             })
@@ -31,7 +31,7 @@ export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
         const todolistId = "78367e7f-8d11-4fec-b28a-ea7ad933518c"
-        todolistApi.deleteTodo(todolistId)
+        todolistApi.removeTodolist(todolistId)
             .then(res=> {
                 setState(res.data)
             })
@@ -43,7 +43,7 @@ export const UpdateTodolistTitle = () => {
     useEffect(() => {
         const todolistId = "f8367fdc-96b0-4feb-a7a1-cbb2f229c705"
         const title = 'CSS'
-        todolistApi.updateTodo(todolistId,title)
+        todolistApi.updateTodolist(todolistId,title)
             .then(res=> {
                 setState(res.data)
             })
@@ -66,7 +66,7 @@ export const CreateTasks = () => {
     useEffect(() => {
         const todolistId = "1e15cb8b-8e18-434f-9226-1ca74695dac4"
         const title = "Params"
-        todolistApi.createTask(todolistId, title)
+        todolistApi.addTask(todolistId, title)
             .then(res=> {
                 setState(res.data.data.item)
             })
@@ -79,7 +79,7 @@ export const DeleteTasks = () => {
     useEffect(() => {
         const todolistId = "1e15cb8b-8e18-434f-9226-1ca74695dac4"
         const taskId = "59dc011d-1abd-48d7-b2a3-247720280fd4"
-        todolistApi.deleteTask(todolistId, taskId)
+        todolistApi.removeTask(todolistId, taskId)
             .then(res=> {
                 setState(res.data)
             })

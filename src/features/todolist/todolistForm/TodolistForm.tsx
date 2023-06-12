@@ -1,14 +1,17 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {useSelector} from "react-redux";
-import {ButtonComponent} from 'component/buttonComponent/ButtonComponent';
-import {EditableSpan} from 'component/EditableSpan/EditableSpan';
-import {AppRootStateType} from 'state/store';
+import {ButtonComponent} from 'common/components/buttonComponent/ButtonComponent';
+import {EditableSpan} from 'common/components/EditableSpan/EditableSpan';
+import {AppRootStateType} from 'app/store';
 import {TodolistStateType} from 'features/todolist/todolists-reducer';
-import {FilterType, TasksStateType, TaskStatuses} from "typing/typing";
-import {AddItemForm} from 'component/addItem/AddItemForm';
-import {ButtonFilterForm} from "component/buttonFilterForm/ButtonFilterForm";
+import {FilterType, TasksStateType} from "typing/typing";
+import {AddItemForm} from 'common/components/addItem/AddItemForm';
+import {ButtonFilterForm} from "common/components/buttonFilterForm/ButtonFilterForm";
 import {Task} from "./task/Task";
 import './TodolistForm.css'
+import {TaskStatuses} from "common/enums/common.enums";
+import {UseAppDispatch} from "common/hooks/useAppDispatch";
+import {tasksThunks} from "features/todolist/tasks.reducer";
 
 
 type TodolistPropsType = {
@@ -24,6 +27,11 @@ type TodolistPropsType = {
 
 export const TodolistForm = React.memo((props: TodolistPropsType) => {
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
+    const dispatch = UseAppDispatch()
+
+    useEffect(()=> {
+        dispatch(tasksThunks.fetchTasks(props.todolist.id))
+    }, [dispatch,props.todolist.id])
 
     let taskForTodolist = tasks[props.todolist.id]
     if (props.todolist.filter === "active") {
