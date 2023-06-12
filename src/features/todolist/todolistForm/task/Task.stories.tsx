@@ -2,7 +2,7 @@ import React from 'react';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {action} from "@storybook/addon-actions";
 import {Task} from './Task';
-import {TaskPriorities, TaskStatuses } from '../../../../typing/typing';
+import { TaskPriorities, TaskStatuses } from 'common/enums/common.enums';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -10,7 +10,7 @@ export default {
     component: Task,
     // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
     args: {
-        deleteTask: action('removeTask'),
+        removeTask: action('removeTask'),
         onChangeTaskStatus: action('changedTaskStatus'),
         onChangeTaskTitle: action('changedTaskTitle')
     },

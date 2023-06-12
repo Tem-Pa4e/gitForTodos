@@ -1,22 +1,10 @@
+import {TaskPriorities, TaskStatuses} from "common/enums/common.enums"
 
 export type FilterType = 'all' | 'active' | 'completed'
 export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
-export enum TaskStatuses {
-    New = 0,
-    InProgress = 1,
-    Completed = 2,
-    Draft = 3
-}
-export enum TaskPriorities {
-    Low = 0,
-    Middle = 1,
-    Hi = 2,
-    Urgently = 3,
-    Later = 4
-}
 export type TaskType = {
     description: string
     title: string
@@ -60,5 +48,9 @@ export interface IUpdateTaskArgs {
     id: string,
     taskId: string,
     model: UpdateTaskModelType
+}
+export interface IUpdateTodolistTitleArgs {
+    id: string,
+    title: string
 }
 

@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import { FilterType } from 'typing/typing';
-import {ButtonComponent} from "../buttonComponent/ButtonComponent";
+import {ButtonComponent} from "common/components/buttonComponent/ButtonComponent";
 
 type ButtonFilterFormType = {
     changeFilter: (todolistId: string, value: FilterType) => void

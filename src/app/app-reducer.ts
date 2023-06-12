@@ -1,9 +1,9 @@
 import {Dispatch} from "redux";
-import {authAPI} from "api/todolist-api";
-import {handleServerAppError, handleServerNetworkError} from "utils/error-utils";
+import {handleServerAppError, handleServerNetworkError} from "common/utils";
 import {authActions} from "features/auth/auth.reducer";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {AppThunk} from "state/store";
+import {AppThunk} from "app/store";
+import {authAPI} from "features/auth/auth.api";
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
